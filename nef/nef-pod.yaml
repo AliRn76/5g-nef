@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nef-deployment
+  labels:
+    app: nef
+spec:
+  selector:
+    matchLabels:
+      app: nef
+  template:
+    metadata:
+      labels:
+        app: nef
+    spec:
+      containers:
+      - name: nef
+        image: registry-pub.aahemm.com/dh-1/nef:v1
+        ports:
+        - containerPort: 8001
+          name: nef-svc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nef-service
+spec:
+  selector:
+    app: nef
+  ports:
+  - name: nef-service-port
+    protocol: TCP
+    port: 8000
+    targetPort: nef-svc

@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: af-deployment
+  labels:
+    app: af
+spec:
+  selector:
+    matchLabels:
+      app: af
+  template:
+    metadata:
+      labels:
+        app: af
+    spec:
+      containers:
+      - name: af
+        image: registry-pub.aahemm.com/dh-1/af:v1

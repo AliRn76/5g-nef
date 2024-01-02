@@ -1,3 +1,2 @@
 pyDiameter~=0.18.7.15
-scapy~=2.5.0
-requests
+httpx[http2]~=0.26.0
