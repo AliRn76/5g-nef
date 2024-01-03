@@ -16,3 +16,4 @@ spec:
       containers:
       - name: af
         image: registry-pub.aahemm.com/dh-1/af:v1
+        imagePullPolicy: Always

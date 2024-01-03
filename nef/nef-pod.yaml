@@ -16,9 +16,11 @@ spec:
       containers:
       - name: nef
         image: registry-pub.aahemm.com/dh-1/nef:v1
+        imagePullPolicy: Always
         ports:
-        - containerPort: 8001
+        - containerPort: 8000
           name: nef-svc
+
 ---
 apiVersion: v1
 kind: Service

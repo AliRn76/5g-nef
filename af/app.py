@@ -38,7 +38,7 @@ class AF:
 
 
 if __name__ == '__main__':
-    af = AF(pcap_path='af/diameters.pcap')
+    af = AF(pcap_path='diameters.pcap')
     while True:
         for packet in af.read_pcap():
             time.sleep(1)  # For Test
