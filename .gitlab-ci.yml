@@ -1,22 +1,21 @@
+image: python:3.8
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+cache:
+  paths:
+    - .cache/pip
+before_script:
+  - pip install virtualenv
+  - virtualenv venv
+  - source venv/bin/activate
+install-requirements:
+  script:
+    - python -m pip install --upgrade pip
+    - pip install -r af/requirements.txt
+    - pip install -r nef/requirements.txt
 test:
-  image: python:3.8
-  variables:
-    PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
-  cache:
-    paths:
-      - .cache/pip
-  before_script:
-    - pip install virtualenv
-    - virtualenv venv
-    - source venv/bin/activate
-  install-requirements:
-    script:
-      - python -m pip install --upgrade pip
-      - pip install -r af/requirements.txt
-      - pip install -r nef/requirements.txt
-  test:
-    script:
-      - python -m unittest */test*.py
+  script:
+    - python -m unittest */test*.py
 
 
 build:
