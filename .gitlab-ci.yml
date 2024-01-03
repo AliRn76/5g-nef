@@ -18,6 +18,7 @@ test:
     script:
       - python -m unittest */test*.py
 
+
 build:
   stage: build
   image: docker:19.03.11
