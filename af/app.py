@@ -11,7 +11,7 @@ logger = logging.getLogger()
 
 
 class AF:
-    NEF_IP = 'nef-service.hc-core-1.cluster.local'
+    NEF_IP = 'nef-service'
     NEF_PORT = 8000
 
     def __init__(self, pcap_path: str):
@@ -27,10 +27,11 @@ class AF:
     def send_packet_to_nef(cls, raw_data: Raw):
         """Send a Packet To NEF"""
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.settimeout(2)
         try:
             s.connect((cls.NEF_IP, cls.NEF_PORT))
             s.send(bytes(raw_data))
-            logger.info('Request Sent!')
+            print('Request Sent!')
         except Exception as e:
             logger.error(e)
         finally:

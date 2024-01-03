@@ -1,0 +1,29 @@
+test:
+  image: python:3.8
+  variables:
+    PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+  cache:
+    paths:
+      - .cache/pip
+  before_script:
+    - pip install virtualenv
+    - virtualenv venv
+    - source venv/bin/activate
+  install-requirements:
+    script:
+      - python -m pip install --upgrade pip
+      - pip install -r af/requirements.txt
+      - pip install -r nef/requirements.txt
+  test:
+    script:
+      - python -m unittest */test*.py
+
+build:
+  stage: build
+  image: docker:19.03.11
+  services:
+    - docker:19.03.11-dind
+  script:
+  - docker build -t -t dh-1/af:v1 .
+  - docker tag dh-1/af:v1 registry-pub.aahemm.com/dh-1/af:v1
+  - docker push registry-pub.aahemm.com/dh-1/af:v1

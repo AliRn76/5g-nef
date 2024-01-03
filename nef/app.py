@@ -44,8 +44,8 @@ class Diameter:
 
 
 class Nef:
-    UE_IP = '10.45.0.13'
-    PCF_IP = 'http://127.0.0.1:8000'
+    UE_IP = '10.45.0.18'
+    PCF_IP = 'http://10.100.1.40'
     LISTEN_PORT = 8000
 
     FLOW_STATUSES = ['ENABLED-UPLINK', 'ENABLED-DOWNLINK', 'ENABLED', 'DISABLED', 'REMOVED']
@@ -64,7 +64,6 @@ class Nef:
         while True:
             s, address = self.server.accept()
             message = s.recv(8192)
-            s.close()
 
             logger.info(f'Received Message From {address}')
             diameter = Diameter(diameter=message)
@@ -86,7 +85,6 @@ class Nef:
                 'ueIpv4': self.UE_IP,
                 'afAppId': avps['AF-Application-Identifier'].decode(),
                 'codecs': codec,
-                'ipv4Addr': '192.168.10.10',
                 'notifUri': 'https://google.com',
                 'suppFeat': '',
                 'medComponents': {
@@ -106,14 +104,14 @@ class Nef:
                 }
             }
         }
-
+        # print(f'{payload=}')
         try:
             response = self.http_client.post(url=url, json=payload)
         except httpx.ConnectError as e:
             logger.error(f'Sending Req Failed: {e}')
         else:
             if response.status_code == 201:
-                logger.info(json.loads(response.text))
+                print(json.loads(response.text))
             else:
                 logger.error(f'Failed {response.content=}, {response.status_code=}')
 
