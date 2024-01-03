@@ -1,4 +1,4 @@
-image: python:3.8
+image: registry-pub.aahemm.com/dh-1/python:3.8
 variables:
   PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
 cache:
@@ -18,10 +18,10 @@ test:
     - python -m unittest */test*.py
 
 
-build:
-  stage: build
-  image: docker:19.03.11
-  script:
-  - docker build -t -t dh-1/af:v1 .
-  - docker tag dh-1/af:v1 registry-pub.aahemm.com/dh-1/af:v1
-  - docker push registry-pub.aahemm.com/dh-1/af:v1
+#build:
+#  stage: build
+#  image: docker:19.03.11
+#  script:
+#  - docker build -t -t dh-1/af:v1 .
+#  - docker tag dh-1/af:v1 registry-pub.aahemm.com/dh-1/af:v1
+#  - docker push registry-pub.aahemm.com/dh-1/af:v1
