@@ -87,6 +87,7 @@ class Nef:
                 'codecs': codec,
                 'notifUri': 'https://google.com',
                 'suppFeat': '',
+
                 'medComponents': {
                     '0': {
                         'medCompN': media_component['Media-Component-Number'],
@@ -94,10 +95,22 @@ class Nef:
                         'marBwUl': str(media_component['Max-Requested-Bandwidth-UL']),
                         'fStatus': self.FLOW_STATUSES[media_component['Flow-Status']],
                         'medType': self.MED_TYPE[media_component['Media-Type']],
-                        'medSubComps': {
-                            '0': {
-                                'fNum': media_component['Media-Sub-Component']['Flow-Number'],
-                                'flowUsage': self.FLOW_USAGES[media_component['Media-Sub-Component']['Flow-Usage']]
+                        "medSubComps": {
+                            "0": {
+                                "fNum": 0,
+                                "flowUsage": "OpenAPI_flow_usage_NO_INFO",
+                                "fDescs": [
+                                    "permit out 17 from 172.20.166.84 to 10.45.0.2 20001",
+                                    "permit in 17 from 10.45.0.2 to 172.20.166.84 20360"
+                                ]
+                            },
+                            "1": {
+                                "fNum": 1,
+                                "flowUsage": "OpenAPI_flow_usage_RTCP",
+                                "fDescs": [
+                                    "permit out 17 from 172.20.166.84 to 10.45.0.2 20002",
+                                    "permit in 17 from 10.45.0.2 to 172.20.166.84 20361"
+                                ]
                             }
                         }
                     }
